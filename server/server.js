@@ -7,16 +7,19 @@ var session = require('express-session');
 //reference to modules strategy object
 var localStrategy = require('passport-local').Strategy;
 var app = express();
-
+//connect to dababase
+var connectionString = 'postgres://localhost:5432/passport_users';
 
 //routes
 var index = require('./routes/index');
 var register = require('./routes/register');
+var users = require('./routes/users');
 app.use(bodyParser.json());
-app.user(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('server/public'));
 app.use('/', index);
 app.use('/register', register);
+app.use('/users', users);
 
 
 //session information
